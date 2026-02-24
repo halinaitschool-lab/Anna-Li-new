@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anna Li — Фотограф</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <script src="https://kit.fontawesome.com/9e7c492e4f.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- MOBILE NAV OVERLAY -->
+    <div class="nav-overlay" id="navOverlay">
+        <a href="#" class="navigation__link" onclick="closeNav()">Головна</a>
+        <a href="#about" class="navigation__link" onclick="closeNav()">Про мене</a>
+        <a href="#portfolio" class="navigation__link" onclick="closeNav()">Портфоліо</a>
+        <a href="#pricing" class="navigation__link" onclick="closeNav()">Ціни</a>
+        <a href="#booking" class="navigation__link" onclick="closeNav()">Контакти</a>
+    </div>
+
+    <!-- HEADER -->
+    <header class="header" id="header">
+        <div class="logo">
+            <p class="logo__text">Anna Li</p>
+        </div>
+        <nav class="navigation-desktop">
+            <a href="#about" class="navigation__link">Про мене</a>
+            <a href="#portfolio" class="navigation__link">Портфоліо</a>
+            <a href="#pricing" class="navigation__link">Ціни</a>
+            <a href="#booking" class="navigation__link">Контакти</a>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+
+    <!-- HERO -->
+    <main class="hero" id="hero">
+        <div class="hero__bg" id="heroBg"></div>
+        <div class="hero__overlay"></div>
+        <div class="hero__grain"></div>
+
+        <div class="hero__container">
+            <p class="hero__eyebrow">Жіночна фотографія</p>
+            <h1 class="hero__title">Ти — не зовнішність.<br><em>Ти — відчуття.</em></h1>
+            <p class="hero__subtitle">Простір, щоб бути собою, відчути жіночність і насолодитися миттю.</p>
+            <a href="#booking" class="hero__button">
+                Записатись на зйомку
+                <svg viewBox="0 0 24 24">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                </svg>
+            </a>
+        </div>
+
+        <div class="hero__scroll">
+            <div class="hero__scroll-line"></div>
+            <span>scroll</span>
+        </div>
+    </main>
+
+    <!-- ABOUT -->
+    <section id="about" class="about">
+        <div class="about__inner"> 
+            <div class="about__text-block reveal-left">
+                <p class="section-label">Для кого цей проєкт</p>
+                <h2 class="about__title">Ця зйомка для жінок, які <em>втомились</em> грати роль</h2>
+                <p class="about__text">Хочуть відчути свою жіночність і готові повністю прийняти себе.</p>
+                <p class="about__text">Годинна спокійна зйомка з м'якими підказками — без тиску позувати, просто бути
+                    присутньою. Можна бути серйозною, емоційною, тихою або грайливою. Все, що ти відчуваєш — правильне.
+                </p>
+            </div>
+            <div class="about__image-wrap reveal-right">
+                <img src="images/nice.jpg" alt="Анна Лі — фотограф" class="about__image">
+            </div>
+        </div>
+    </section>
+
+    <!-- PREPARATION -->
+    <section class="preparation">
+        <div class="preparation__inner">
+            <div class="preparation__image-col reveal-left">
+                <img src="images/girl.jpg" alt="Образ і підготовка" class="preparation__image">
+                <span class="preparation__image-label">Образ і підготовка</span>
+            </div>
+            <div class="preparation__content reveal-right">
+                <p class="section-label">Що включено</p>
+                <h2 class="preparation__title">Образ і підготовка</h2>
+                <p class="preparation__subtitle">Я підкажу одяг, кольори та деталі, які підкреслять твою природність і
+                    внутрішній стан.</p>
+
+                <div class="benefits-list">
+                    <div class="benefit reveal">
+                        <div class="benefit__num">1</div>
+                        <div class="benefit__text-wrap">
+                            <div class="benefit__title">Консультація з образу</div>
+                            <div class="benefit__desc">Разом підберемо одяг та аксесуари, що підкреслять твою
+                                індивідуальність.</div>
+                        </div>
+                    </div>
+                    <div class="benefit reveal" style="transition-delay:0.1s">
+                        <div class="benefit__num">2</div>
+                        <div class="benefit__text-wrap">
+                            <div class="benefit__title">Кольорова гармонія</div>
+                            <div class="benefit__desc">Підберемо палітру, яка відображає твій внутрішній стан та
+                                підсилює природню красу.</div>
+                        </div>
+                    </div>
+                    <div class="benefit reveal" style="transition-delay:0.2s">
+                        <div class="benefit__num">3</div>
+                        <div class="benefit__text-wrap">
+                            <div class="benefit__title">Деталі та акценти</div>
+                            <div class="benefit__desc">Прикраси, текстури, аксесуари — все, що створює образ без
+                                надмірності.</div>
+                        </div>
+                    </div>
+                    <div class="benefit reveal" style="transition-delay:0.3s">
+                        <div class="benefit__num">4</div>
+                        <div class="benefit__text-wrap">
+                            <div class="benefit__title">Комфортна атмосфера</div>
+                            <div class="benefit__desc">М'які підказки по позах без тиску — просто бути собою в кожному
+                                кадрі.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHAT YOU GET -->
+    <section class="outcomes">
+        <div class="outcomes__inner">
+            <div class="outcomes__header reveal">
+                <p class="section-label">Результат</p>
+                <h2 class="outcomes__title">Що ти отримаєш</h2>
+            </div>
+            <div class="outcomes__grid">
+                <div class="outcome-card reveal" style="transition-delay:0s">
+                    <!-- <div class="outcome-card__icon">🖼</div> -->
+                    <i class="fa-duotone fa-solid fa-photo-film"></i>
+                    <div>
+                        <div class="outcome-card__title">Оброблені фото</div>
+                        <div class="outcome-card__desc">Професійно відретушовані знімки, що зберігають твою справжність.
+                        </div>
+                    </div>
+                </div>
+                <div class="outcome-card reveal" style="transition-delay:0.1s">
+                    <!-- <div class="outcome-card__icon">✨</div> -->
+                    <i class="fa-solid fa-heart"></i>
+                    <div>
+                        <div class="outcome-card__title">Досвід прийняття</div>
+                        <div class="outcome-card__desc">Відчуття своєї цінності та краси — те, що залишиться назавжди.
+                        </div>
+                    </div>
+                </div>
+                <div class="outcome-card reveal" style="transition-delay:0.2s">
+                    <!-- <div class="outcome-card__icon">💫</div> -->
+                    <i class="fa-solid fa-star"></i>
+                    <div>
+                        <div class="outcome-card__title">Справжні кадри</div>
+                        <div class="outcome-card__desc">Фотографії, що нагадують про твою справжню сутність і
+                            залишаються цінними роками.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MANIFESTO MARQUEE -->
+    <section class="manifesto">
+        <div class="manifesto__track-wrap">
+            <div class="manifesto__row">
+                <div class="manifesto__inner">
+                    <!-- duplicated for seamless loop -->
+                    <span class="manifesto__phrase">Тобі не потрібно бути ідеальною</span>
+                    <span class="manifesto__dot"></span>
+                    <span class="manifesto__phrase">Достатньо бути собою</span>
+                    <span class="manifesto__dot"></span>
+                    <span class="manifesto__phrase">Це простір, де тебе бачать</span>
+                    <span class="manifesto__dot"></span>
+                    <span class="manifesto__phrase">Тобі не потрібно бути ідеальною</span>
+                    <span class="manifesto__dot"></span>
+                    <span class="manifesto__phrase">Достатньо бути собою</span>
+                    <span class="manifesto__dot"></span>
+                    <span class="manifesto__phrase">Це простір, де тебе бачать</span>
+                    <span class="manifesto__dot"></span>
+                </div>
+            </div>
+            <div class="manifesto__row">
+                <div class="manifesto__inner">
+                    <span class="manifesto__phrase"
+                        style="font-style:normal;font-size:1.1rem;letter-spacing:0.06em;color:var(--blush);">ANNA LI
+                        PHOTOGRAPHY</span>
+                    <span class="manifesto__dot"></span>
+                    <span class="manifesto__phrase"
+                        style="font-style:normal;font-size:1.1rem;letter-spacing:0.06em;color:var(--text-light);">Варшава ·
+                        Poland</span>
+                    <span class="manifesto__dot"></span>
+                    <span class="manifesto__phrase"
+                        style="font-style:normal;font-size:1.1rem;letter-spacing:0.06em;color:var(--blush);">ANNA LI
+                        PHOTOGRAPHY</span>
+                    <span class="manifesto__dot"></span>
+                    <span class="manifesto__phrase"
+                        style="font-style:normal;font-size:1.1rem;letter-spacing:0.06em;color:var(--text-light);">Варшава ·
+                        Poland</span>
+                    <span class="manifesto__dot"></span>
+                    <span class="manifesto__phrase"
+                        style="font-style:normal;font-size:1.1rem;letter-spacing:0.06em;color:var(--blush);">ANNA LI
+                        PHOTOGRAPHY</span>
+                    <span class="manifesto__dot"></span>
+                    <span class="manifesto__phrase"
+                        style="font-style:normal;font-size:1.1rem;letter-spacing:0.06em;color:var(--text-light);">Варшава ·
+                        Poland</span>
+                    <span class="manifesto__dot"></span>
+                </div>
+            </div>
+            <div class="manifesto__row">
+                <div class="manifesto__inner">
+                    <span class="manifesto__phrase">Кожна жінка заслуговує бачити себе красивою</span>
+                    <span class="manifesto__dot"></span>
+                    <span class="manifesto__phrase">Жіночність — це відчуття, а не розмір</span>
+                    <span class="manifesto__dot"></span>
+                    <span class="manifesto__phrase">Кожна жінка заслуговує бачити себе красивою</span>
+                    <span class="manifesto__dot"></span>
+                    <span class="manifesto__phrase">Жіночність — це відчуття, а не розмір</span>
+                    <span class="manifesto__dot"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio" class="portfolio">
+        <div class="portfolio__inner">
+            <div class="portfolio__header reveal">
+                <div>
+                    <p class="section-label" style="color:var(--blush)">— обрані роботи</p>
+                    <h2 class="portfolio__title">Portfolio</h2>
+                </div>
+            </div>
+
+            <!-- Mobile carousel -->
+            <div class="portfolio__carousel">
+                <div class="portfolio__item">
+                    <img src="images/love.jpg" alt="Love">
+                    <div class="portfolio__item-overlay"></div>
+                </div>
+                <div class="portfolio__item">
+                    <img src="images/face.jpg" alt="Bright scarf girl">
+                    <div class="portfolio__item-overlay"></div>
+                </div>
+                <div class="portfolio__item">
+                    <img src="images/yellow.jpg" alt="Yellow pants girl">
+                    <div class="portfolio__item-overlay"></div>
+                </div>
+                <div class="portfolio__item">
+                    <img src="images/yellow-girl.jpg" alt="Yellow girl">
+                    <div class="portfolio__item-overlay"></div>
+                </div>
+                <div class="portfolio__item">
+                    <img src="images/curly.jpg" alt="Side looking girl">
+                    <div class="portfolio__item-overlay"></div>
+                </div>
+                <div class="portfolio__item">
+                    <img src="images/family.jpg" alt="Family photo">
+                    <div class="portfolio__item-overlay"></div>
+                </div>
+                <div class="portfolio__item">
+                    <img src="images/boy.jpg" alt="Underground boy">
+                    <div class="portfolio__item-overlay"></div>
+                </div>
+            </div>
+
+            <!-- Mobile dots -->
+            <div class="portfolio__dots" id="portfolioDots"></div>
+
+            <!-- Desktop masonry grid -->
+            <div class="portfolio__grid">
+                <div class="portfolio__row portfolio__row--1">
+                    <div class="portfolio__item">
+                        <img src="images/love.jpg" alt="Love">
+                        <div class="portfolio__item-overlay"></div>
+                    </div>
+                    <div class="portfolio__item">
+                        <img src="images/face.jpg" alt="Bright scarf girl">
+                        <div class="portfolio__item-overlay"></div>
+                    </div>
+                    <div class="portfolio__item">
+                        <img src="images/yellow.jpg" alt="Yellow pants girl">
+                        <div class="portfolio__item-overlay"></div>
+                    </div>
+                </div>
+                <div class="portfolio__row portfolio__row--2">
+                    <div class="portfolio__item">
+                        <img src="images/yellow-girl.jpg" alt="Yellow girl">
+                        <div class="portfolio__item-overlay"></div>
+                    </div>
+                    <div class="portfolio__item">
+                        <img src="images/curly.jpg" alt="Curly hair girl">
+                        <div class="portfolio__item-overlay"></div>
+                    </div>
+                    <div class="portfolio__item">
+                        <img src="images/family.jpg" alt="Family photo">
+                        <div class="portfolio__item-overlay"></div>
+                    </div>
+                    <div class="portfolio__item">
+                        <img src="images/boy.jpg" alt="Underground boy">
+                        <div class="portfolio__item-overlay"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="pricing">
+        <div class="pricing__inner">
+            <p class="section-label reveal" style="justify-content:center;margin-bottom:8px">Вартість</p>
+            <h2 class="pricing__title reveal">Оберіть свій формат</h2>
+            <div class="pricing__cards">
+                <div class="pricing-card reveal" style="transition-delay:0s">
+                    <div class="pricing-card__name">Легкий</div>
+                    <div class="pricing-card__price"><span>₴</span>2 500</div>
+                    <div class="pricing-card__desc">30-хвилинна зйомка для тих, хто хоче спробувати</div>
+                    <ul class="pricing-card__features">
+                        <li class="pricing-card__feature">30 хвилин зйомки</li>
+                        <li class="pricing-card__feature">15 оброблених фото</li>
+                        <li class="pricing-card__feature">Консультація з образу</li>
+                    </ul>
+                    <a href="#booking" class="pricing-card__btn">Записатись</a>
+                </div>
+                <div class="pricing-card pricing-card--featured reveal" style="transition-delay:0.1s">
+                    <div class="pricing-card__badge">Popular</div>
+                    <div class="pricing-card__name">Повний</div>
+                    <div class="pricing-card__price"><span>₴</span>4 800</div>
+                    <div class="pricing-card__desc">Годинна зйомка — повне занурення у свою жіночність</div>
+                    <ul class="pricing-card__features">
+                        <li class="pricing-card__feature">60 хвилин зйомки</li>
+                        <li class="pricing-card__feature">35 оброблених фото</li>
+                        <li class="pricing-card__feature">Консультація з образу</li>
+                        <li class="pricing-card__feature">Підбір локації</li>
+                    </ul>
+                    <a href="#booking" class="pricing-card__btn">Записатись</a>
+                </div>
+                <div class="pricing-card reveal" style="transition-delay:0.2s">
+                    <div class="pricing-card__name">VIP</div>
+                    <div class="pricing-card__price"><span>₴</span>8 500</div>
+                    <div class="pricing-card__desc">Преміум досвід з двома образами та фото-книгою</div>
+                    <ul class="pricing-card__features">
+                        <li class="pricing-card__feature">2 години зйомки</li>
+                        <li class="pricing-card__feature">70+ оброблених фото</li>
+                        <li class="pricing-card__feature">Два образи</li>
+                        <li class="pricing-card__feature">Фото-книга у подарунок</li>
+                    </ul>
+                    <a href="#booking" class="pricing-card__btn">Записатись</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOOKING -->
+    <section id="booking" class="booking">
+        <div class="booking__inner">
+            <div class="reveal">
+                <p class="section-label">Записатись</p>
+                <h2 class="booking__title">Готова зробити крок?</h2>
+                <p class="booking__desc">Заповни форму і я зв'яжусь з тобою протягом доби, щоб обговорити деталі зйомки.
+                </p>
+            </div>
+            <form action="#" method="post" class="booking__form reveal" style="transition-delay:0.15s">
+                <div class="booking__row">
+                    <div class="booking__field">
+                        <label for="name" class="booking__label">Ім'я *</label>
+                        <input type="text" id="name" name="name" required placeholder="Твоє ім'я">
+                    </div>
+                    <div class="booking__field">
+                        <label for="nikName" class="booking__label">Telegram *</label>
+                        <input type="text" id="nikName" name="nikName" required placeholder="@username">
+                    </div>
+                </div>
+                <div class="booking__row">
+                    <div class="booking__field">
+                        <label for="email" class="booking__label">Email</label>
+                        <input type="email" id="email" name="email" placeholder="your@email.com">
+                    </div>
+                    <div class="booking__field">
+                        <label for="phone" class="booking__label">Телефон</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+480">
+                    </div>
+                </div>
+                <div class="booking__field">
+                    <label for="types" class="booking__label">Тип зйомки</label>
+                    <select id="types" name="types">
+                        <option value="individual">Індивідуальна</option>
+                        <option value="group">Групова</option>
+                        <option value="couple">Парна</option>
+                        <option value="family">Сімейна</option>
+                    </select>
+                </div>
+                <div class="booking__field">
+                    <label for="suggestions" class="booking__label">Побажання</label>
+                    <textarea id="suggestions" name="suggestions"
+                        placeholder="Розкажи про себе та свої бажання..."></textarea>
+                </div>
+                <button type="submit" class="booking__submit">
+                    Надіслати заявку
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.5">
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                        <polyline points="12 5 19 12 12 19" />
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer__inner">
+            <div class="footer__top">
+                <div class="footer__brand">
+                    <div class="footer__brand-name">Anna Li</div>
+                    <p class="footer__brand-tagline">Жіночна фотографія у Києві. Простір, де тебе бачать справжньою.</p>
+                </div>
+                <div>
+                    <div class="footer__col-title">Соціальні мережі</div>
+                    <ul class="footer__socials">
+                        <li><a href="#" class="footer__social-link">Instagram</a></li>
+                        <li><a href="#" class="footer__social-link">Facebook</a></li>
+                        <li><a href="#" class="footer__social-link">Telegram</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer__col-title">Розсилка</div>
+                    <form action="#" method="post" class="footer__form">
+                        <input type="email" class="footer__input" placeholder="Введіть ваш email" required>
+                        <button type="submit" class="footer__button">Підписатися</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="footer__copy">© 2026 Anna Li Photography. Всі права захищені.</p>
+                <p class="footer__copy">Варшава, Україна</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
