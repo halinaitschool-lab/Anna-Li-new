@@ -19,8 +19,14 @@ function animateRing() {
 animateRing();
 
 document.querySelectorAll('a, button').forEach(el => {
-    el.addEventListener('mouseenter', () => { cursor.style.transform = 'translate(-50%,-50%) scale(2)'; ring.style.transform = 'translate(-50%,-50%) scale(1.5)'; });
-    el.addEventListener('mouseleave', () => { cursor.style.transform = 'translate(-50%,-50%) scale(1)'; ring.style.transform = 'translate(-50%,-50%) scale(1)'; });
+    el.addEventListener('mouseenter', () => {
+        cursor.style.transform = 'translate(-50%,-50%) scale(2)';
+        ring.style.transform = 'translate(-50%,-50%) scale(1.5)';
+    });
+    el.addEventListener('mouseleave', () => {
+        cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+        ring.style.transform = 'translate(-50%,-50%) scale(1)';
+    });
 });
 
 /* ─── HEADER SCROLL ─── */
@@ -64,36 +70,43 @@ const observer = new IntersectionObserver((entries) => {
         }
     });
 }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
 revealEls.forEach(el => observer.observe(el));
 
-/* ─── PORTFOLIO CAROUSEL DOTS ─── */
-const carousel = document.querySelector('.portfolio__carousel');
-const dotsContainer = document.getElementById('portfolioDots');
-const items = document.querySelectorAll('.portfolio__carousel .portfolio__item');
+/* ─── PORTFOLIO FILTER ─── */
+const filterBtns = document.querySelectorAll('.portfolio__filter');
+const portfolioItems = document.querySelectorAll('.p-item');
+const descBlocks = document.querySelectorAll('.port-desc');
 
-if (carousel && dotsContainer && items.length) {
-    items.forEach((_, i) => {
-        const dot = document.createElement('div');
-        dot.className = 'portfolio__dot' + (i === 0 ? ' active' : '');
-        dot.addEventListener('click', () => {
-            carousel.scrollTo({ left: items[i].offsetLeft - 24, behavior: 'smooth' });
+filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+
+        // update active button
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // filter items
+        portfolioItems.forEach(item => {
+            const cat = item.dataset.category;
+            const show = filter === 'all' || cat === filter;
+            if (show) {
+                item.classList.remove('hidden');
+            } else {
+                item.classList.add('hidden');
+            }
         });
-        dotsContainer.appendChild(dot);
+
+        // update descriptions
+        descBlocks.forEach(d => {
+            d.classList.remove('port-desc--active');
+            if (d.dataset.for === filter) {
+                d.classList.add('port-desc--active');
+            }
+        });
     });
+});
 
-    carousel.addEventListener('scroll', () => {
-        const dots = dotsContainer.querySelectorAll('.portfolio__dot');
-        let closest = 0, minDist = Infinity;
-        items.forEach((item, i) => {
-            const dist = Math.abs(item.offsetLeft - carousel.scrollLeft - 24);
-            if (dist < minDist) { minDist = dist; closest = i; }
-        });
-        dots.forEach((d, i) => d.classList.toggle('active', i === closest));
-    }, { passive: true });
-}
-
-/* ─── STAGGER REVEAL FOR CARDS ─── */
-document.querySelectorAll('.outcome-card, .pricing-card, .benefit').forEach((el, i) => {
-    el.style.transitionDelay = `${i * 0.08}s`;
+/* ─── STAGGER CARDS ─── */
+document.querySelectorAll('.outcome-card, .pricing-card, .benefit, .review-card, .for-whom__card').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 0.06}s`;
 });
