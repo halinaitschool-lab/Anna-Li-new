@@ -316,7 +316,7 @@ img { max-width: 100%; }
     .navigation-desktop { display: flex; }
 
     .hero { padding: 0 80px 80px; }
-    .hero__container { margin-top: auto; padding-top: 160px; min-width: 100%;}
+    .hero__container { margin-top: auto; padding-top: 160px;}
 
     .for-whom { padding: 120px 60px; }
     .for-whom__grid { grid-template-columns: repeat(3, 1fr); }
