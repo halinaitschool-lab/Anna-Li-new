@@ -6,23 +6,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anna Li — Жіночна фотографія</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
 
-    <!-- CUSTOM CURSOR -->
+    <!-- CUSTOM CURSOR (desktop only) -->
     <div class="cursor" id="cursor"></div>
     <div class="cursor-ring" id="cursorRing"></div>
 
+
     <!-- MOBILE NAV OVERLAY -->
     <div class="nav-overlay" id="navOverlay">
+        <button class="nav-overlay__close" onclick="closeNav()" aria-label="Закрити меню">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
         <a href="#" class="navigation__link" onclick="closeNav()">Головна</a>
         <a href="#for-whom" class="navigation__link" onclick="closeNav()">Для кого</a>
         <a href="#portfolio" class="navigation__link" onclick="closeNav()">Портфоліо</a>
         <a href="#pricing" class="navigation__link" onclick="closeNav()">Ціни</a>
         <a href="#booking" class="navigation__link" onclick="closeNav()">Контакти</a>
+    </div>
+
+    <!-- BOOKING DRAWER MODAL -->
+    <div class="drawer-backdrop" id="drawerBackdrop"></div>
+    <div class="drawer" id="bookingDrawer" role="dialog" aria-modal="true" aria-label="Записатись на фотосесію">
+        <div class="drawer__header">
+            <div>
+                <p class="drawer__label" id="drawerPackage">Записатись</p>
+                <h3 class="drawer__title">Готова зробити крок?</h3>
+            </div>
+            <button class="drawer__close" id="drawerClose" aria-label="Закрити">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+        <div class="drawer__body">
+            <form action="https://formspree.io/f/xkoqpoqb" method="POST" id="drawerForm">
+                <input type="hidden" name="_subject" value="Нова заявка на фотосесію — Anna Li">
+                <input type="hidden" name="package" id="drawerPackageInput">
+                <input type="text" name="_gotcha" style="display:none">
+
+                <div class="drawer__field">
+                    <label class="drawer__field-label">Ім'я *</label>
+                    <input type="text" name="name" required placeholder="Твоє ім'я">
+                </div>
+                <div class="drawer__field">
+                    <label class="drawer__field-label">Telegram *</label>
+                    <input type="text" name="telegram" required placeholder="@username">
+                </div>
+                <div class="drawer__field">
+                    <label class="drawer__field-label">Телефон</label>
+                    <input type="tel" name="phone" placeholder="+48 123 456 789">
+                </div>
+                <div class="drawer__field">
+                    <label class="drawer__field-label">Тип фотосесії</label>
+                    <select name="session_type" placeholder="Оберіть тип">
+                        <option value="">Оберіть тип фотосесії</option>
+                        <option value="for-woman">Жіноча фотосесія</option>
+                        <option value="love-story">Love Story</option>
+                        <option value="family">Family</option>
+                    </select>
+                </div>
+                <div class="drawer__field">
+                    <label class="drawer__field-label">Email</label>
+                    <input type="email" name="email" placeholder="your@email.com">
+                </div>
+                <div class="drawer__field">
+                    <label class="drawer__field-label">Побажання</label>
+                    <textarea name="message" rows="3" placeholder="Що хочеш відчути на зйомці?"></textarea>
+                </div>
+                <button type="submit" class="drawer__submit" id="drawerSubmitBtn">
+                    Надіслати заявку
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+            </form>
+            <div class="drawer__success" id="drawerSuccess">
+                <div class="drawer__success-icon">✓</div>
+                <p class="drawer__success-title">Заявку отримано!</p>
+                <p class="drawer__success-text">Я напишу тобі протягом доби ✨</p>
+            </div>
+        </div>
     </div>
 
     <!-- HEADER -->
@@ -48,17 +113,23 @@
         <div class="hero__grain"></div>
 
         <div class="hero__container">
-            <p class="hero__eyebrow">Жіночна фотографія · Варшава</p>
+            <p class="hero__eyebrow"><i class="fa-solid fa-camera-retro"></i> Жіночна фотографія · Варшава</p>
             <h1 class="hero__title">Ти — не зовнішність.<br><em>Ти — відчуття.</em></h1>
             <p class="hero__subtitle">Фотосесії для жінок, пар і сімей —<br>щоб ти побачила свою справжню красу і отримала фото, до яких захочеться повертатися роками.</p>
             <div class="hero__actions">
-                <a href="#booking" class="hero__button hero__button--primary">
+                <a href="#" class="hero__button hero__button--primary" onclick="openDrawer('Фотосесія'); return false;">
+                    <i class="fa-regular fa-calendar-check"></i>
                     Хочу свою фотосесію
-                    <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
                 <a href="#portfolio" class="hero__button hero__button--ghost">
-                    Подивитися портфоліо
+                    <i class="fa-regular fa-images"></i>
+                    Портфоліо
                 </a>
+            </div>
+            <div class="hero__trust">
+                <div class="hero__trust-item"><i class="fa-solid fa-star"></i> 100+ задоволених клієнток</div>
+                <div class="hero__trust-dot"></div>
+                <div class="hero__trust-item"><i class="fa-regular fa-clock"></i> Відповідь протягом доби</div>
             </div>
         </div>
 
@@ -73,28 +144,28 @@
         <div class="for-whom__inner">
             <div class="for-whom__header reveal">
                 <p class="section-label">Коли ця зйомка для тебе</p>
-                <h2 class="for-whom__title">Ти впізнаєш себе?</h2>
+                <h2 class="for-whom__title">Знайомо?</h2>
             </div>
             <div class="for-whom__grid">
                 <div class="for-whom__card reveal" style="transition-delay:0s">
-                    <div class="for-whom__num">01</div>
-                    <p class="for-whom__text">Ти давно хотіла зробити щось тільки для себе, але завжди знаходила причину відкласти</p>
+                    <i class="fa-regular fa-clock for-whom__icon"></i>
+                    <p class="for-whom__text">Давно хотіла зробити щось для себе — але завжди знаходила причину відкласти</p>
                 </div>
                 <div class="for-whom__card reveal" style="transition-delay:0.08s">
-                    <div class="for-whom__num">02</div>
-                    <p class="for-whom__text">Тобі хочеться побачити себе красивою і справжньою — без масок і ролей</p>
+                    <i class="fa-regular fa-eye for-whom__icon"></i>
+                    <p class="for-whom__text">Хочеш побачити себе красивою і справжньою — без масок і ролей</p>
                 </div>
                 <div class="for-whom__card reveal" style="transition-delay:0.16s">
-                    <div class="for-whom__num">03</div>
-                    <p class="for-whom__text">Ти хвилюєшся, що не вмієш позувати — і саме тому ще не наважилась</p>
+                    <i class="fa-regular fa-face-smile-beam for-whom__icon"></i>
+                    <p class="for-whom__text">Хвилюєшся, що не вмієш позувати — і саме тому ще не наважилась</p>
                 </div>
                 <div class="for-whom__card reveal" style="transition-delay:0.24s">
-                    <div class="for-whom__num">04</div>
-                    <p class="for-whom__text">Ти хочеш зберегти важливий момент — закоханість, вагітність, першого року сім'ї</p>
+                    <i class="fa-regular fa-heart for-whom__icon"></i>
+                    <p class="for-whom__text">Хочеш зберегти важливий момент — закоханість, вагітність, перший рік сім'ї</p>
                 </div>
                 <div class="for-whom__card reveal" style="transition-delay:0.32s">
-                    <div class="for-whom__num">05</div>
-                    <p class="for-whom__text">Тобі потрібні фотографії, до яких хочеться повертатися — не «нормальні», а живі</p>
+                    <i class="fa-regular fa-images for-whom__icon"></i>
+                    <p class="for-whom__text">Потрібні фотографії, до яких хочеться повертатися — не «нормальні», а живі</p>
                 </div>
                 <div class="for-whom__card for-whom__card--quote reveal" style="transition-delay:0.4s">
                     <p class="for-whom__quote">"Перестань відкладати на «колись». Почни зберігати важливі моменти вже зараз."</p>
@@ -132,39 +203,31 @@
             </div>
             <div class="outcomes__grid">
                 <div class="outcome-card reveal" style="transition-delay:0s">
-                    <div class="outcome-card__icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                    </div>
+                    <div class="outcome-card__icon"><i class="fa-regular fa-image fa-lg"></i></div>
                     <div>
                         <div class="outcome-card__title">Оброблені фотографії</div>
-                        <div class="outcome-card__desc">Отримаєш професійно відретушовані знімки, які зберігають твою природність і справжні емоції — без пластику і штучності.</div>
+                        <div class="outcome-card__desc">Професійно відретушовані знімки, які зберігають твою природність — без пластику і штучності.</div>
                     </div>
                 </div>
                 <div class="outcome-card reveal" style="transition-delay:0.1s">
-                    <div class="outcome-card__icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                    </div>
+                    <div class="outcome-card__icon"><i class="fa-regular fa-heart fa-lg"></i></div>
                     <div>
                         <div class="outcome-card__title">Досвід прийняття себе</div>
-                        <div class="outcome-card__desc">Відчуття своєї цінності та краси — те, що залишиться з тобою назавжди. Багато клієнток кажуть, що це змінило їхнє ставлення до себе.</div>
+                        <div class="outcome-card__desc">Відчуття своєї цінності та краси — те, що залишиться з тобою назавжди.</div>
                     </div>
                 </div>
                 <div class="outcome-card reveal" style="transition-delay:0.2s">
-                    <div class="outcome-card__icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                    </div>
+                    <div class="outcome-card__icon"><i class="fa-regular fa-star fa-lg"></i></div>
                     <div>
-                        <div class="outcome-card__title">Фото, до яких хочеться повертатись</div>
-                        <div class="outcome-card__desc">Живі кадри, що нагадують про твою справжню сутність. Не постановка — а справжній момент, збережений назавжди.</div>
+                        <div class="outcome-card__title">Фото, до яких повертаються</div>
+                        <div class="outcome-card__desc">Живі кадри, що нагадують про твою справжню сутність. Не постановка — а момент.</div>
                     </div>
                 </div>
                 <div class="outcome-card reveal" style="transition-delay:0.3s">
-                    <div class="outcome-card__icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                    </div>
+                    <div class="outcome-card__icon"><i class="fa-regular fa-comment-dots fa-lg"></i></div>
                     <div>
                         <div class="outcome-card__title">Підтримку під час зйомки</div>
-                        <div class="outcome-card__desc">Я поруч від першого кадру до останнього — підказую, підтримую, жартую. Щоб ти забула про камеру і просто була собою.</div>
+                        <div class="outcome-card__desc">Я поруч від першого кадру до останнього — підказую, підтримую, щоб ти забула про камеру.</div>
                     </div>
                 </div>
             </div>
@@ -222,7 +285,7 @@
         <div class="portfolio__inner">
             <div class="portfolio__header reveal">
                 <div>
-                    <p class="section-label" style="color:var(--blush)">обрані роботи</p>
+                    <p class="section-label" style="color:var(--blush)">— обрані роботи</p>
                     <h2 class="portfolio__title">Portfolio</h2>
                 </div>
                 <div class="portfolio__filters">
@@ -432,7 +495,7 @@
     <section id="about" class="about">
         <div class="about__inner">
             <div class="about__image-wrap reveal-left">
-                <img src="images/nice.jpg" alt="Анна Лі — фотограф" class="about__image">
+                <img src="images/yellow-girl.jpg" alt="Анна Лі — фотограф" class="about__image">
             </div>
             <div class="about__text-block reveal-right">
                 <p class="section-label">Про мене</p>
@@ -503,51 +566,66 @@
             <p class="section-label reveal" style="justify-content:center;margin-bottom:8px">Вартість</p>
             <h2 class="pricing__title reveal">Оберіть свій формат</h2>
             <div class="pricing__cards">
+
                 <div class="pricing-card reveal" style="transition-delay:0s">
                     <div class="pricing-card__name">Легкий</div>
                     <div class="pricing-card__price">250<span>zł</span></div>
-                    <div class="pricing-card__desc">Для тих, хто хоче спробувати і побачити себе іншою</div>
+                    <div class="pricing-card__for-whom">
+                        <div class="pricing-card__for-whom-label"><i class="fa-regular fa-user"></i> Для кого</div>
+                        <p>Перша фотосесія — хочеш спробувати без зобов'язань.</p>
+                    </div>
+                    <div class="pricing-card__desc">30 хв · 15 фото · 1–2 образи</div>
                     <ul class="pricing-card__features">
-                        <li class="pricing-card__feature">30 хвилин зйомки</li>
-                        <li class="pricing-card__feature">15 оброблених фото</li>
-                        <li class="pricing-card__feature">1-2 образи</li>
-                        <li class="pricing-card__feature">Легка ретуш</li>
-                        <li class="pricing-card__feature">Допомога з позуванням</li>
-                        <li class="pricing-card__feature">Швидка обробка 3-5 днів</li>
+                        <li class="pricing-card__feature"><i class="fa-regular fa-check-circle"></i> 30 хвилин зйомки</li>
+                        <li class="pricing-card__feature"><i class="fa-regular fa-check-circle"></i> 15 оброблених фото</li>
+                        <li class="pricing-card__feature"><i class="fa-regular fa-check-circle"></i> 1–2 образи</li>
+                        <li class="pricing-card__feature"><i class="fa-regular fa-check-circle"></i> Легка ретуш</li>
+                        <li class="pricing-card__feature"><i class="fa-regular fa-check-circle"></i> Допомога з позуванням</li>
+                        <li class="pricing-card__feature"><i class="fa-regular fa-check-circle"></i> Готово за 3–5 днів</li>
                     </ul>
-                    <a href="#booking" class="pricing-card__btn">Хочу спробувати</a>
+                    <a href="#" class="pricing-card__btn" onclick="openDrawer('Легкий — 250 zł'); return false;">Хочу спробувати</a>
                 </div>
+
                 <div class="pricing-card pricing-card--featured reveal" style="transition-delay:0.1s">
                     <div class="pricing-card__badge">Найпопулярніший</div>
                     <div class="pricing-card__name">Повний</div>
                     <div class="pricing-card__price">450<span>zł</span></div>
-                    <div class="pricing-card__desc">Повне занурення — час побути собою без поспіху</div>
+                    <div class="pricing-card__for-whom pricing-card__for-whom--light">
+                        <div class="pricing-card__for-whom-label"><i class="fa-regular fa-heart"></i> Для кого</div>
+                        <p>Хочеш оновити фото для соцмереж або відзначити важливий момент.</p>
+                    </div>
+                    <div class="pricing-card__desc">60 хв · 25 фото · 3–4 образи</div>
                     <ul class="pricing-card__features">
-                        <li class="pricing-card__feature">60 хвилин зйомки</li>
-                        <li class="pricing-card__feature">25 оброблених фото</li>
-                        <li class="pricing-card__feature">3-4 образи</li>
-                        <li class="pricing-card__feature">Професійна ретуш</li>
-                        <li class="pricing-card__feature">Допомога у побудові особистого бренду через фото</li>
-                        <li class="pricing-card__feature">Консультація з образу</li>
-                        <li class="pricing-card__feature">Обробка 3-7 днів</li>
+                        <li class="pricing-card__feature"><i class="fa-regular fa-check-circle"></i> 60 хвилин зйомки</li>
+                        <li class="pricing-card__feature"><i class="fa-regular fa-check-circle"></i> 25 оброблених фото</li>
+                        <li class="pricing-card__feature"><i class="fa-regular fa-check-circle"></i> 3–4 образи</li>
+                        <li class="pricing-card__feature"><i class="fa-regular fa-check-circle"></i> Професійна ретуш</li>
+                        <li class="pricing-card__feature"><i class="fa-regular fa-check-circle"></i> Допомога з особистим брендом</li>
+                        <li class="pricing-card__feature"><i class="fa-regular fa-check-circle"></i> Консультація з образу</li>
+                        <li class="pricing-card__feature"><i class="fa-regular fa-check-circle"></i> Готово за 3–7 днів</li>
                     </ul>
-                    <a href="#booking" class="pricing-card__btn">Хочу таку фотосесію</a>
+                    <a href="#" class="pricing-card__btn" onclick="openDrawer('Повний — 450 zł'); return false;">Хочу таку фотосесію</a>
                 </div>
+
                 <div class="pricing-card reveal" style="transition-delay:0.2s">
                     <div class="pricing-card__name">VIP</div>
                     <div class="pricing-card__price">650<span>zł</span></div>
-                    <div class="pricing-card__desc">Преміум досвід — два образи, максимум часу і фото-книга</div>
+                    <div class="pricing-card__for-whom">
+                        <div class="pricing-card__for-whom-label"><i class="fa-brands fa-instagram"></i> Для маркетингу</div>
+                        <p>Підприємниця або блогерка — потрібен контент для соцмереж на місяці вперед.</p>
+                    </div>
+                    <div class="pricing-card__desc">2 год · 50+ фото · 5 образів</div>
                     <ul class="pricing-card__features">
-                        <li class="pricing-card__feature">2 години зйомки</li>
-                        <li class="pricing-card__feature">50+ оброблених фото</li>
-                        <li class="pricing-card__feature">5 образи</li>
-                        <li class="pricing-card__feature">Консультація перед зйомкою</li>
-                        <li class="pricing-card__feature">Допомога з позуванням</li>
-                        <li class="pricing-card__feature">Відео для Reals у подарунок</li>
-                        <li class="pricing-card__feature">Обробка 3-7 днів</li>
+                        <li class="pricing-card__feature"><i class="fa-regular fa-check-circle"></i> 2 години зйомки</li>
+                        <li class="pricing-card__feature"><i class="fa-regular fa-check-circle"></i> 50+ оброблених фото</li>
+                        <li class="pricing-card__feature"><i class="fa-regular fa-check-circle"></i> 5 образів</li>
+                        <li class="pricing-card__feature"><i class="fa-regular fa-check-circle"></i> Консультація перед зйомкою</li>
+                        <li class="pricing-card__feature"><i class="fa-brands fa-instagram"></i> Відео для Reels у подарунок</li>
+                        <li class="pricing-card__feature"><i class="fa-regular fa-check-circle"></i> Готово за 3–7 днів</li>
                     </ul>
-                    <a href="#booking" class="pricing-card__btn">Забронювати VIP</a>
+                    <a href="#" class="pricing-card__btn" onclick="openDrawer('VIP — 650 zł'); return false;">Забронювати VIP</a>
                 </div>
+
             </div>
             <p class="pricing__note reveal">Ціни вказані для жіночих зйомок. Love story і family — уточнюйте при бронюванні.</p>
         </div>
@@ -559,47 +637,38 @@
             <div class="reveal">
                 <p class="section-label">Записатись</p>
                 <h2 class="booking__title">Готова зробити крок?</h2>
-                <p class="booking__desc">Заповни форму і я зв'яжусь з тобою протягом доби, щоб обговорити деталі зйомки. Не хвилюйся — я відповідаю завжди.</p>
+                <p class="booking__desc">Заповни форму або напиши напряму — відповідаю протягом доби.</p>
             </div>
-            <form action="#" method="post" class="booking__form reveal" style="transition-delay:0.15s">
-                <div class="booking__row">
-                    <div class="booking__field">
-                        <label for="name" class="booking__label">Ім'я *</label>
-                        <input type="text" id="name" name="name" required placeholder="Твоє ім'я">
+            <div class="booking__contacts reveal" style="transition-delay:0.1s">
+                <a href="tel:+48789904721" class="booking__contact-item">
+                    <div class="booking__contact-icon"><i class="fa-solid fa-phone"></i></div>
+                    <div>
+                        <div class="booking__contact-label">Телефон</div>
+                        <div class="booking__contact-value">+48 789 904 721</div>
                     </div>
-                    <div class="booking__field">
-                        <label for="nikName" class="booking__label">Telegram *</label>
-                        <input type="text" id="nikName" name="nikName" required placeholder="@username">
+                </a>
+                <a href="https://t.me/AnnaLi28" target="_blank" class="booking__contact-item">
+                    <div class="booking__contact-icon"><i class="fa-brands fa-telegram"></i></div>
+                    <div>
+                        <div class="booking__contact-label">Telegram</div>
+                        <div class="booking__contact-value">@AnnaLi28</div>
                     </div>
-                </div>
-                <div class="booking__row">
-                    <div class="booking__field">
-                        <label for="email" class="booking__label">Email</label>
-                        <input type="email" id="email" name="email" placeholder="your@email.com">
+                </a>
+                <a href="https://www.instagram.com/anna.lishchyna/" target="_blank" class="booking__contact-item">
+                    <div class="booking__contact-icon"><i class="fa-brands fa-instagram"></i></div>
+                    <div>
+                        <div class="booking__contact-label">Instagram</div>
+                        <div class="booking__contact-value">@anna.lishchyna</div>
                     </div>
-                    <div class="booking__field">
-                        <label for="phone" class="booking__label">Телефон</label>
-                        <input type="tel" id="phone" name="phone" placeholder="+48">
-                    </div>
-                </div>
-                <div class="booking__field">
-                    <label for="types" class="booking__label">Тип зйомки</label>
-                    <select id="types" name="types">
-                        <option value="single">Жіноча зйомка</option>
-                        <option value="love">Love Story</option>
-                        <option value="family">Сімейна</option>
-                        <option value="other">Інше</option>
-                    </select>
-                </div>
-                <div class="booking__field">
-                    <label for="suggestions" class="booking__label">Розкажи про себе</label>
-                    <textarea id="suggestions" name="suggestions" placeholder="Що хочеш відчути на зйомці? Чи є важливий момент, який хочеш зберегти?"></textarea>
-                </div>
-                <button type="submit" class="booking__submit">
-                    Надіслати заявку
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+            <div class="booking__cta reveal" style="transition-delay:0.2s">
+                <p class="booking__cta-text">Або заповни коротку форму — я зв'яжусь сама:</p>
+                <button class="booking__cta-btn" onclick="openDrawer('Загальний запит')">
+                    <i class="fa-regular fa-calendar-check"></i>
+                    Записатись на фотосесію
                 </button>
-            </form>
+            </div>
         </div>
     </section>
 
@@ -614,9 +683,9 @@
                 <div>
                     <div class="footer__col-title">Соціальні мережі</div>
                     <ul class="footer__socials">
-                        <li><a href="https://www.instagram.com/anna.lishchyna/" target="_blank" class="footer__social-link">Instagram</a></li>
+                        <li><a href="https://www.instagram.com/anna.lishchyna" target="_blank" class="footer__social-link">Instagram</a></li>
                         <li><a href="https://www.facebook.com/profile.php?id=100018529603299&ref=NONE_ig_profile_ac" target="_blank" class="footer__social-link">Facebook</a></li>
-                        <li><a href="https://web.telegram.org/a/#950270475" target="_blank" class="footer__social-link">Telegram</a></li>
+                        <li><a href="https://t.me/AnnaLi28" target="_blank" class="footer__social-link">Telegram</a></li>
                     </ul>
                 </div>
                 <div>
